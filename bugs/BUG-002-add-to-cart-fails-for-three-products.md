@@ -25,8 +25,11 @@ All six buttons change to **Remove**; cart badge shows **6**.
 ## Actual
 Backpack, Bike Light and Onesie change to Remove. Bolt T-Shirt, Fleece Jacket and Test.allTheThings() T-Shirt (Red) still show Add to cart. Badge shows **3**.
 
+## Also observed
+The same three products cannot be added from their product pages either (Add to cart stays Add to cart, badge unchanged). Not yet automated.
+
 ## Impact
-Half the catalog cannot be bought — including the highest-priced item (Fleece Jacket, $49.99). No workaround from the inventory page.
+Half the catalog cannot be bought — including the highest-priced item (Fleece Jacket, $49.99). No workaround: adding from the product page fails too.
 
 ## Evidence
 - Full-page screenshot after clicking all six: [inventory-after-adding-all-six.png](evidence/BUG-002/inventory-after-adding-all-six.png)

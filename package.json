@@ -10,7 +10,7 @@
     "evidence": "playwright test --project=problem-user && node scripts/collect-evidence.ts",
     "report": "playwright show-report",
     "typecheck": "tsc --noEmit",
-    "evidence:export": "EXPORT_DIR=$HOME/Desktop/saucedemo-bug-screenshots node scripts/collect-evidence.ts"
+    "evidence:export": "playwright test --project=problem-user && EXPORT_DIR=$HOME/Desktop/saucedemo-bug-screenshots node scripts/collect-evidence.ts"
   },
   "author": "Anne Mary Wynter",
   "license": "MIT",

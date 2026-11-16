@@ -1,0 +1,78 @@
+Error: expect(locator).toHaveText(expected) failed
+
+Locator:  getByTestId('inventory-item-name')
+Expected: "Sauce Labs Fleece Jacket"
+Received: "ITEM NOT FOUND"
+Timeout:  5000ms
+
+Call log:
+  - Expect "soft toHaveText" getByTestId('inventory-item-name') with timeout 5000ms
+  - waiting for getByTestId('inventory-item-name')
+    14 × locator resolved to <div data-test="inventory-item-name" class="inventory_details_name large_size">ITEM NOT FOUND</div>
+       - unexpected value "ITEM NOT FOUND"
+
+
+  107 |       await test.info().attach('product-page-after-clicking-fleece-jacket', { body: await page.screenshot(), contentType: 'image/png' });
+  108 |
+> 109 |       await expect.soft(productPage.name).toHaveText(product.name);
+      |                                           ^
+  110 |       await expect.soft(productPage.price).toHaveText(product.price);
+  111 |
+  112 |       await page.getByRole('button', { name: 'Add to cart' }).click();
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:109:43
+
+---
+
+Error: expect(locator).toHaveText(expected) failed
+
+Locator:  getByTestId('inventory-item-price')
+Expected: "$49.99"
+Received: "$√-1"
+Timeout:  5000ms
+
+Call log:
+  - Expect "soft toHaveText" getByTestId('inventory-item-price') with timeout 5000ms
+  - waiting for getByTestId('inventory-item-price')
+    14 × locator resolved to <div class="inventory_details_price" data-test="inventory-item-price">$√-1</div>
+       - unexpected value "$√-1"
+
+
+  108 |
+  109 |       await expect.soft(productPage.name).toHaveText(product.name);
+> 110 |       await expect.soft(productPage.price).toHaveText(product.price);
+      |                                            ^
+  111 |
+  112 |       await page.getByRole('button', { name: 'Add to cart' }).click();
+  113 |       await expect(inventoryPage.cartBadge).toHaveText('1');
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:110:44
+
+---
+
+Error: cart should list the item the badge counts
+
+expect(locator).toHaveText(expected) failed
+
+Locator: getByTestId('inventory-item-name')
+Timeout: 5000ms
+- Expected  - 3
++ Received  + 1
+
+- Array [
+-   "Sauce Labs Fleece Jacket",
+- ]
++ Array []
+
+Call log:
+  - cart should list the item the badge counts getByTestId('inventory-item-name') with timeout 5000ms
+  - waiting for getByTestId('inventory-item-name')
+    14 × locator resolved to 0 elements
+
+
+  114 |       await cartPage.goto();
+  115 |       await test.info().attach('cart-after-adding-from-that-page', { body: await page.screenshot(), contentType: 'image/png' });
+> 116 |       await expect(cartPage.itemNames, 'cart should list the item the badge counts').toHaveText([product.name]);
+      |                                                                                      ^
+  117 |     });
+  118 | });
+  119 |
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:116:86

@@ -94,3 +94,25 @@ test.describe('Known defects – problem_user', () => {
       for (const src of sources) expect(src).not.toContain('sl-404');
     });
 });
+
+test.describe('Known defects – problem_user product page', () => {
+  test('BUG-007 Fleece Jacket opens its own product page and adds a real item',
+    { tag: ['@BUG-007', '@sev-high', '@P2'], annotation: bug('BUG-007', 'fleece-jacket-opens-item-not-found') },
+    async ({ page, inventoryPage, productPage, cartPage }) => {
+      test.fail();
+      const product = PRODUCTS.find(p => p.name === 'Sauce Labs Fleece Jacket')!;
+      await inventoryPage.goto();
+      await inventoryPage.openProduct(product.name);
+      await expect(productPage.backButton).toBeVisible();
+      await test.info().attach('product-page-after-clicking-fleece-jacket', { body: await page.screenshot(), contentType: 'image/png' });
+
+      await expect.soft(productPage.name).toHaveText(product.name);
+      await expect.soft(productPage.price).toHaveText(product.price);
+
+      await page.getByRole('button', { name: 'Add to cart' }).click();
+      await expect(inventoryPage.cartBadge).toHaveText('1');
+      await cartPage.goto();
+      await test.info().attach('cart-after-adding-from-that-page', { body: await page.screenshot(), contentType: 'image/png' });
+      await expect(cartPage.itemNames, 'cart should list the item the badge counts').toHaveText([product.name]);
+    });
+});

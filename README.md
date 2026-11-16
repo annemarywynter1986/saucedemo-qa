@@ -5,7 +5,7 @@ Playwright + TypeScript test automation and defect reports for [saucedemo.com](h
 Two accounts are tested side by side:
 
 - **`standard_user`** — the baseline. Every regression test passes.
-- **`problem_user`** — runs the same expectations. Six defects were found, reported in [`bugs/`](bugs/README.md) with evidence, and each is covered by an automated test.
+- **`problem_user`** — runs the same expectations. Seven defects were found, reported in [`bugs/`](bugs/README.md) with evidence, and each is covered by an automated test.
 
 ## Project structure
 
@@ -57,6 +57,7 @@ The password defaults to the public demo password; override with `SAUCE_PASSWORD
 | BUG-002 | High | P1 | Add to cart does nothing for 3 of 6 products |
 | BUG-003 | High | P2 | Remove button on Products page does not remove the item |
 | BUG-004 | High | P2 | Clicking a product opens a different product's page |
+| BUG-007 | High | P2 | Fleece Jacket opens "ITEM NOT FOUND" ($√-1); Add to cart creates a phantom item |
 | BUG-006 | Medium | P2 | Every product shows the same placeholder image |
 | BUG-005 | Medium | P3 | Product sort dropdown has no effect |
 
