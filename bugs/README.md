@@ -47,6 +47,7 @@ A defect is **Verified** when its automated test passes unexpectedly (Playwright
 ```bash
 npm run evidence          # runs the problem_user suite and refreshes bugs/evidence/
 npm run evidence:export   # same, plus copies all screenshots to ~/Desktop/saucedemo-bug-screenshots
+npm run walkthrough       # records one captioned video of all seven defects to ~/Desktop/saucedemo-bug-walkthrough.webm
 ```
 
 `bugs/jira-import.csv` holds the same seven tickets for import into Jira (or any tracker that takes CSV).
