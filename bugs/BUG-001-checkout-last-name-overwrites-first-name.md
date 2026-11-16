@@ -27,6 +27,8 @@ First Name = `Anne`, Last Name = `Wynter`; Continue opens *Checkout: Overview* (
 ## Actual
 First Name = `Wynter`, Last Name = empty. Continue stays on step one with *"Error: Last Name is required"*.
 
+When typed key by key, as a real user types, each keystroke in Last Name replaces the whole First Name: typing \`Wynter\` leaves First Name = \`r\` (the last letter) and Last Name empty. Pasting the whole word (as the automated test's \`fill()\` does) leaves First Name = \`Wynter\`. Either way the typed first name is lost and Last Name stays empty. See the walkthrough video (\`npm run walkthrough\`).
+
 ## Impact
 Blocks the purchase funnel for every affected user — no order can be placed. Hence Critical / P1.
 

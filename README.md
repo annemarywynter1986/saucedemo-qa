@@ -20,6 +20,7 @@ tests/
   standard-user/            regression suite — must stay green
   problem-user/             known-defects suite — one test per bug, marked test.fail()
 scripts/collect-evidence.ts copies each bug's screenshots/video/trace into bugs/evidence/
+scripts/record-walkthrough.ts records one captioned video walking through every defect
 bugs/                       defect board, one report per bug, evidence, Jira CSV
 ```
 
@@ -44,6 +45,7 @@ npm run test:p1           # only P1 defects (--grep @P1)
 npx playwright test --grep @sev-critical
 npm run evidence          # refresh bugs/evidence/
 npm run evidence:export   # also copy screenshots to ~/Desktop/saucedemo-bug-screenshots
+npm run walkthrough       # record a captioned video of every defect to ~/Desktop/saucedemo-bug-walkthrough.webm
 npm run report            # open the HTML report
 ```
 
