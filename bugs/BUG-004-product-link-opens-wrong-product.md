@@ -42,6 +42,8 @@ The title, description, image and price on each opened page are consistent with 
 Users see the wrong product's description and price, and *Add to cart* on that page adds the wrong item. Risk of wrong orders and customer complaints.
 
 ## Evidence
+![BUG-004 product page after clicking backpack](evidence/BUG-004/product-page-after-clicking-backpack.png)
+
 - Screenshot after clicking Backpack: [product-page-after-clicking-backpack.png](evidence/BUG-004/product-page-after-clicking-backpack.png)
 - Video: [video.webm](evidence/BUG-004/video.webm) · Trace: [trace.zip](evidence/BUG-004/trace.zip)
 - Assertion output: [assertion-failures.txt](evidence/BUG-004/assertion-failures.txt) — `Expected: …?id=4`, `Received: …?id=5`

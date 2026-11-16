@@ -29,6 +29,8 @@ Button still reads **Remove**; badge still shows **1**.
 Users cannot correct their cart from the Products page, so they may check out with items they did not want. Kept at P2 (not P1) on the assumption that removal from the Cart page is a workaround — that path is not yet covered by a test and should be confirmed during triage.
 
 ## Evidence
+![BUG-003 inventory after remove click](evidence/BUG-003/inventory-after-remove-click.png)
+
 - Screenshot after clicking Remove: [inventory-after-remove-click.png](evidence/BUG-003/inventory-after-remove-click.png)
 - Video: [video.webm](evidence/BUG-003/video.webm) · Trace: [trace.zip](evidence/BUG-003/trace.zip)
 - Assertion output: [assertion-failures.txt](evidence/BUG-003/assertion-failures.txt)

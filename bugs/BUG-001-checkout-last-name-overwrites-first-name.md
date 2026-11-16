@@ -31,6 +31,8 @@ First Name = `Wynter`, Last Name = empty. Continue stays on step one with *"Erro
 Blocks the purchase funnel for every affected user — no order can be placed. Hence Critical / P1.
 
 ## Evidence
+![BUG-001 checkout form after typing](evidence/BUG-001/checkout-form-after-typing.png)
+
 - Screenshot after typing: [checkout-form-after-typing.png](evidence/BUG-001/checkout-form-after-typing.png)
 - Video: [video.webm](evidence/BUG-001/video.webm) · Trace: [trace.zip](evidence/BUG-001/trace.zip) (`npx playwright show-trace bugs/evidence/BUG-001/trace.zip`)
 - Assertion output: [assertion-failures.txt](evidence/BUG-001/assertion-failures.txt) — `Expected: "Anne"`, `Received: "Wynter"`

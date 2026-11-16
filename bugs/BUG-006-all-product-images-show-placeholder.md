@@ -28,6 +28,8 @@ Six copies of the same placeholder image; one unique `src` instead of six.
 Users cannot tell products apart visually. Function is unaffected (Medium severity), but it is highly visible on the main landing page and hurts conversion, so priority is raised to P2.
 
 ## Evidence
+![BUG-006 inventory images](evidence/BUG-006/inventory-images.png)
+
 - Full-page screenshot: [inventory-images.png](evidence/BUG-006/inventory-images.png)
 - Image `src` values: [image-src-values.json](evidence/BUG-006/image-src-values.json)
 - Video: [video.webm](evidence/BUG-006/video.webm) · Trace: [trace.zip](evidence/BUG-006/trace.zip)

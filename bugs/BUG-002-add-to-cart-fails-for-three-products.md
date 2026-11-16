@@ -32,6 +32,8 @@ The same three products cannot be added from their product pages either (Add to 
 Half the catalog cannot be bought — including the highest-priced item (Fleece Jacket, $49.99). No workaround: adding from the product page fails too.
 
 ## Evidence
+![BUG-002 inventory after adding all six](evidence/BUG-002/inventory-after-adding-all-six.png)
+
 - Full-page screenshot after clicking all six: [inventory-after-adding-all-six.png](evidence/BUG-002/inventory-after-adding-all-six.png)
 - Video: [video.webm](evidence/BUG-002/video.webm) · Trace: [trace.zip](evidence/BUG-002/trace.zip)
 - Assertion output: [assertion-failures.txt](evidence/BUG-002/assertion-failures.txt) — one soft failure per broken product, then badge `Expected: "6"`, `Received: "3"`
