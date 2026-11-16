@@ -33,7 +33,7 @@ test.describe('Known defects – problem_user', () => {
     });
 
   test('BUG-002 every product can be added to the cart',
-    { tag: ['@BUG-002', '@sev-high', '@P1'], annotation: bug('BUG-002', 'add-to-cart-fails-for-three-products') },
+    { tag: ['@BUG-002', '@sev-high', '@P2'], annotation: bug('BUG-002', 'add-to-cart-fails-for-three-products') },
     async ({ page, inventoryPage }) => {
       test.fail();
       for (const product of PRODUCTS) await inventoryPage.addToCart(product.name);

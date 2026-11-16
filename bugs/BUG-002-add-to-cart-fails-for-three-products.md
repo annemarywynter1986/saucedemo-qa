@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Severity | **High** |
-| Priority | **P1 – fix this sprint** |
+| Priority | **P2 – next sprint** |
 | Component | Inventory › Add to cart |
 | Labels | cart, inventory, revenue |
 | Environment | https://www.saucedemo.com · Chromium 159 (Playwright 1.65.1, Desktop Chrome 1280×720) · macOS 26.2 |
@@ -39,4 +39,4 @@ Half the catalog cannot be bought — including the highest-priced item (Fleece 
 - Assertion output: [assertion-failures.txt](evidence/BUG-002/assertion-failures.txt) — one soft failure per broken product, then badge `Expected: "6"`, `Received: "3"`
 
 ## Automated test
-`tests/problem-user/known-defects.spec.ts` › *BUG-002 every product can be added to the cart* (`@BUG-002 @sev-high @P1`)
+`tests/problem-user/known-defects.spec.ts` › *BUG-002 every product can be added to the cart* (`@BUG-002 @sev-high @P2`)

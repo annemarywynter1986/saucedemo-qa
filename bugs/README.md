@@ -7,14 +7,14 @@ Seven defects found by comparing `problem_user` against `standard_user` (baselin
 | ID | Title | Severity | Priority | Component | Test tag |
 |---|---|---|---|---|---|
 | [BUG-001](BUG-001-checkout-last-name-overwrites-first-name.md) | Checkout: typing Last Name overwrites First Name; checkout blocked | Critical | P1 | Checkout | `@BUG-001` |
-| [BUG-002](BUG-002-add-to-cart-fails-for-three-products.md) | Add to cart does nothing for 3 of 6 products | High | P1 | Inventory › Cart | `@BUG-002` |
+| [BUG-002](BUG-002-add-to-cart-fails-for-three-products.md) | Add to cart does nothing for 3 of 6 products | High | P2 | Inventory › Cart | `@BUG-002` |
 | [BUG-003](BUG-003-remove-from-cart-does-nothing-on-inventory.md) | Remove button on Products page does not remove the item | High | P2 | Inventory › Cart | `@BUG-003` |
 | [BUG-004](BUG-004-product-link-opens-wrong-product.md) | Clicking a product opens a different product's page | High | P2 | Inventory › Navigation | `@BUG-004` |
 | [BUG-007](BUG-007-fleece-jacket-opens-item-not-found.md) | Fleece Jacket opens "ITEM NOT FOUND" ($√-1); Add to cart creates a phantom item | High | P2 | Product detail | `@BUG-007` |
 | [BUG-006](BUG-006-all-product-images-show-placeholder.md) | Every product shows the same placeholder image | Medium | P2 | Inventory › Images | `@BUG-006` |
 | [BUG-005](BUG-005-product-sort-has-no-effect.md) | Product sort dropdown has no effect | Medium | P3 | Inventory › Sort | `@BUG-005` |
 
-**Sprint recommendation:** BUG-001 and BUG-002 go into the current sprint (they block or cut revenue). BUG-003, BUG-004, BUG-007 and BUG-006 are next-sprint candidates. BUG-005 goes to the backlog.
+**Sprint recommendation:** Only BUG-001 goes into the current sprint, because it blocks every order. BUG-002, BUG-003, BUG-004, BUG-007 and BUG-006 are next-sprint candidates. BUG-005 goes to the backlog.
 
 ## Severity — how bad is the impact?
 

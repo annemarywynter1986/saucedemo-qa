@@ -21,7 +21,7 @@ Two accounts are tested side by side:
 | ID | Severity | Priority | Summary |
 |---|---|---|---|
 | [BUG-001](bugs/BUG-001-checkout-last-name-overwrites-first-name.md) | Critical | P1 | Checkout: typing Last Name overwrites First Name; order cannot be placed |
-| [BUG-002](bugs/BUG-002-add-to-cart-fails-for-three-products.md) | High | P1 | Add to cart does nothing for 3 of 6 products |
+| [BUG-002](bugs/BUG-002-add-to-cart-fails-for-three-products.md) | High | P2 | Add to cart does nothing for 3 of 6 products |
 | [BUG-003](bugs/BUG-003-remove-from-cart-does-nothing-on-inventory.md) | High | P2 | Remove button on Products page does not remove the item |
 | [BUG-004](bugs/BUG-004-product-link-opens-wrong-product.md) | High | P2 | Clicking a product opens a different product's page |
 | [BUG-007](bugs/BUG-007-fleece-jacket-opens-item-not-found.md) | High | P2 | Fleece Jacket opens "ITEM NOT FOUND" ($√-1); Add to cart creates a phantom item |

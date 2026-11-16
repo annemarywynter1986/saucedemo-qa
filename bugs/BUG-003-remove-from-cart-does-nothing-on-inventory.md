@@ -26,7 +26,7 @@ Button returns to **Add to cart**; cart badge disappears.
 Button still reads **Remove**; badge still shows **1**.
 
 ## Impact
-Users cannot correct their cart from the Products page, so they may check out with items they did not want. Kept at P2 (not P1) on the assumption that removal from the Cart page is a workaround — that path is not yet covered by a test and should be confirmed during triage.
+Users cannot correct their cart from the Products page, so they may check out with items they did not want. P2, confirmed in triage: only the checkout blocker (BUG-001) is P1. Removal from the Cart page is not yet covered by a test.
 
 ## Evidence
 ![BUG-003 inventory after remove click](evidence/BUG-003/inventory-after-remove-click.png)

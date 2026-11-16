@@ -68,11 +68,11 @@ await caption('BUG-005 · Medium / P3 · Sort dropdown has no effect', 'After ch
 await hold(3500);
 
 // BUG-002
-await caption('BUG-002 · High / P1 · Add to cart fails for 3 of 6 products', 'Clicking Add to cart on all six products…');
+await caption('BUG-002 · High / P2 · Add to cart fails for 3 of 6 products', 'Clicking Add to cart on all six products…');
 for (const { name } of PRODUCTS) await item(name).getByRole('button', { name: 'Add to cart' }).click();
 for (const name of ['Bolt T-Shirt', 'Fleece Jacket', 'Test.allTheThings']) await highlight(item(name).getByRole('button'));
 await highlight(page.getByTestId('shopping-cart-badge'));
-await caption('BUG-002 · High / P1 · Add to cart fails for 3 of 6 products', 'Bolt T-Shirt, Fleece Jacket and Red T-Shirt still say "Add to cart". Cart badge shows 3, not 6.');
+await caption('BUG-002 · High / P2 · Add to cart fails for 3 of 6 products', 'Bolt T-Shirt, Fleece Jacket and Red T-Shirt still say "Add to cart". Cart badge shows 3, not 6.');
 await page.mouse.wheel(0, 300);
 await hold(4500);
 await page.mouse.wheel(0, -300);
