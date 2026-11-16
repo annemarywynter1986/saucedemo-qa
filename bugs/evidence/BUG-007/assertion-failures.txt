@@ -12,14 +12,14 @@ Call log:
        - unexpected value "ITEM NOT FOUND"
 
 
-  107 |       await test.info().attach('product-page-after-clicking-fleece-jacket', { body: await page.screenshot(), contentType: 'image/png' });
-  108 |
-> 109 |       await expect.soft(productPage.name).toHaveText(product.name);
+  119 |       await test.info().attach('product-page-after-clicking-fleece-jacket', { body: await page.screenshot(), contentType: 'image/png' });
+  120 |
+> 121 |       await expect.soft(productPage.name).toHaveText(product.name);
       |                                           ^
-  110 |       await expect.soft(productPage.price).toHaveText(product.price);
-  111 |
-  112 |       await page.getByRole('button', { name: 'Add to cart' }).click();
-    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:109:43
+  122 |       await expect.soft(productPage.price).toHaveText(product.price);
+  123 |
+  124 |       await page.getByRole('button', { name: 'Add to cart' }).click();
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:121:43
 
 ---
 
@@ -37,14 +37,14 @@ Call log:
        - unexpected value "$√-1"
 
 
-  108 |
-  109 |       await expect.soft(productPage.name).toHaveText(product.name);
-> 110 |       await expect.soft(productPage.price).toHaveText(product.price);
+  120 |
+  121 |       await expect.soft(productPage.name).toHaveText(product.name);
+> 122 |       await expect.soft(productPage.price).toHaveText(product.price);
       |                                            ^
-  111 |
-  112 |       await page.getByRole('button', { name: 'Add to cart' }).click();
-  113 |       await expect(inventoryPage.cartBadge).toHaveText('1');
-    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:110:44
+  123 |
+  124 |       await page.getByRole('button', { name: 'Add to cart' }).click();
+  125 |       await expect(inventoryPage.cartBadge).toHaveText('1');
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:122:44
 
 ---
 
@@ -68,11 +68,11 @@ Call log:
     14 × locator resolved to 0 elements
 
 
-  114 |       await cartPage.goto();
-  115 |       await test.info().attach('cart-after-adding-from-that-page', { body: await page.screenshot(), contentType: 'image/png' });
-> 116 |       await expect(cartPage.itemNames, 'cart should list the item the badge counts').toHaveText([product.name]);
+  126 |       await cartPage.goto();
+  127 |       await test.info().attach('cart-after-adding-from-that-page', { body: await page.screenshot(), contentType: 'image/png' });
+> 128 |       await expect(cartPage.itemNames, 'cart should list the item the badge counts').toHaveText([product.name]);
       |                                                                                      ^
-  117 |     });
-  118 | });
-  119 |
-    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:116:86
+  129 |     });
+  130 | });
+  131 |
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:128:86

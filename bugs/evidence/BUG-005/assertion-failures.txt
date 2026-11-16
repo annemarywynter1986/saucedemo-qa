@@ -25,11 +25,11 @@ Call log:
     14 × locator resolved to 6 elements
 
 
-  80 |       await test.info().attach('inventory-after-sort-za', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
-  81 |
-> 82 |       await expect(inventoryPage.itemNames).toHaveText(PRODUCTS.map(p => p.name).sort().reverse());
+  92 |       await test.info().attach('inventory-after-sort-za', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
+  93 |
+> 94 |       await expect(inventoryPage.itemNames).toHaveText(PRODUCTS.map(p => p.name).sort().reverse());
      |                                             ^
-  83 |     });
-  84 |
-  85 |   test('BUG-006 every product shows its own image',
-    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:82:45
+  95 |     });
+  96 |
+  97 |   test('BUG-006 every product shows its own image',
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:94:45

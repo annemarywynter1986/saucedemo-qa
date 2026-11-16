@@ -2,14 +2,14 @@ Error: expect(locator).toHaveValue(expected) failed
 
 Locator:  getByTestId('firstName')
 Expected: "Anne"
-Received: "Wynter"
+Received: "r"
 Timeout:  5000ms
 
 Call log:
   - Expect "toHaveValue" getByTestId('firstName') with timeout 5000ms
   - waiting for getByTestId('firstName')
-    14 × locator resolved to <input type="text" value="Wynter" id="first-name" name="firstName" autocorrect="off" data-test="firstName" autocapitalize="none" aria-label="First Name" placeholder="First Name" class="input_error form_input"/>
-       - unexpected value "Wynter"
+    14 × locator resolved to <input value="r" type="text" id="first-name" name="firstName" autocorrect="off" data-test="firstName" autocapitalize="none" aria-label="First Name" placeholder="First Name" class="input_error form_input"/>
+       - unexpected value "r"
 
 
   27 |       await test.info().attach('checkout-form-after-typing', { body: await page.screenshot(), contentType: 'image/png' });

@@ -42,6 +42,12 @@ The title, description, image and price on each opened page are consistent with 
 Users see the wrong product's description and price, and *Add to cart* on that page adds the wrong item. Risk of wrong orders and customer complaints.
 
 ## Evidence
+Annotated screenshot (red outline = the defect):
+
+![BUG-004 annotated: wrong product opens](evidence/annotated/BUG-004_wrong-product-opens.png)
+
+Screenshot captured by the automated test:
+
 ![BUG-004 product page after clicking backpack](evidence/BUG-004/product-page-after-clicking-backpack.png)
 
 - Screenshot after clicking Backpack: [product-page-after-clicking-backpack.png](evidence/BUG-004/product-page-after-clicking-backpack.png)

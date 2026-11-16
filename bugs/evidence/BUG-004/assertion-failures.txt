@@ -10,11 +10,11 @@ Call log:
        - unexpected value "https://www.saucedemo.com/inventory-item.html?id=5"
 
 
-  69 |       await test.info().attach('product-page-after-clicking-backpack', { body: await page.screenshot(), contentType: 'image/png' });
-  70 |
-> 71 |       await expect(page).toHaveURL(`/inventory-item.html?id=${product.id}`);
+  81 |       await test.info().attach('product-page-after-clicking-backpack', { body: await page.screenshot(), contentType: 'image/png' });
+  82 |
+> 83 |       await expect(page).toHaveURL(`/inventory-item.html?id=${product.id}`);
      |                          ^
-  72 |       await expect(productPage.name).toHaveText(product.name);
-  73 |     });
-  74 |
-    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:71:26
+  84 |       await expect(productPage.name).toHaveText(product.name);
+  85 |     });
+  86 |
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:83:26

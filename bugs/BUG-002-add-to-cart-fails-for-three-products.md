@@ -32,6 +32,12 @@ The same three products cannot be added from their product pages either (Add to 
 Half the catalog cannot be bought — including the highest-priced item (Fleece Jacket, $49.99). No workaround: adding from the product page fails too.
 
 ## Evidence
+Annotated screenshot (red outline = the defect):
+
+![BUG-002 annotated: add to cart fails](evidence/annotated/BUG-002_add-to-cart-fails.png)
+
+Screenshot captured by the automated test:
+
 ![BUG-002 inventory after adding all six](evidence/BUG-002/inventory-after-adding-all-six.png)
 
 - Full-page screenshot after clicking all six: [inventory-after-adding-all-six.png](evidence/BUG-002/inventory-after-adding-all-six.png)

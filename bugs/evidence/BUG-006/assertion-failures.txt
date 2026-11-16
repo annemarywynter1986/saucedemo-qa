@@ -3,11 +3,11 @@ Error: expect(received).toBe(expected) // Object.is equality
 Expected: 6
 Received: 1
 
-  91 |       await test.info().attach('image-src-values', { body: JSON.stringify(sources, null, 2), contentType: 'application/json' });
-  92 |
-> 93 |       expect(new Set(sources).size).toBe(PRODUCTS.length);
-     |                                     ^
-  94 |       for (const src of sources) expect(src).not.toContain('sl-404');
-  95 |     });
-  96 | });
-    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:93:37
+  103 |       await test.info().attach('image-src-values', { body: JSON.stringify(sources, null, 2), contentType: 'application/json' });
+  104 |
+> 105 |       expect(new Set(sources).size).toBe(PRODUCTS.length);
+      |                                     ^
+  106 |       for (const src of sources) expect(src).not.toContain('sl-404');
+  107 |     });
+  108 | });
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:105:37

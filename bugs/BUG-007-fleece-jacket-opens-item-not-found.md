@@ -35,6 +35,14 @@ Step 5: cart is empty, although the badge still shows 1. Browser storage `cart-c
 The highest-priced product cannot be viewed. Together with BUG-002 (it cannot be added from the Products page either), the Fleece Jacket cannot be bought at all. The phantom item makes the cart count wrong, which erodes trust and could break checkout totals.
 
 ## Evidence
+Annotated screenshots (red outline = the defect):
+
+![BUG-007 annotated: item not found page](evidence/annotated/BUG-007_item-not-found-page.png)
+
+![BUG-007 annotated: phantom cart item](evidence/annotated/BUG-007_phantom-cart-item.png)
+
+Screenshot captured by the automated test:
+
 ![BUG-007 product page after clicking fleece jacket](evidence/BUG-007/product-page-after-clicking-fleece-jacket.png)
 
 ![BUG-007 cart after adding from that page](evidence/BUG-007/cart-after-adding-from-that-page.png)

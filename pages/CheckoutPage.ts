@@ -27,6 +27,13 @@ export class CheckoutPage {
     await this.postalCode.fill(info.postalCode);
   }
 
+  // Types key by key, the way a real user does (fill() pastes the whole value at once).
+  async typeInformation(info: { firstName: string; lastName: string; postalCode: string }) {
+    await this.firstName.pressSequentially(info.firstName);
+    await this.lastName.pressSequentially(info.lastName);
+    await this.postalCode.pressSequentially(info.postalCode);
+  }
+
   async continue() {
     await this.continueButton.click();
   }

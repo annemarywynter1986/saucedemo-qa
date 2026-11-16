@@ -16,19 +16,19 @@ Error: expect(locator).toHaveValue(expected) failed
 
 Locator:  getByTestId('firstName')
 Expected: "Anne"
-Received: "Wynter"
+Received: "r"
 Timeout:  5000ms
 
 Call log:
   - Expect "toHaveValue" getByTestId('firstName') with timeout 5000ms
   - waiting for getByTestId('firstName')
-    14 × locator resolved to <input type="text" value="Wynter" id="first-name" name="firstName" autocorrect="off" data-test="firstName" autocapitalize="none" aria-label="First Name" placeholder="First Name" class="input_error form_input"/>
-       - unexpected value "Wynter"
+    14 × locator resolved to <input value="r" type="text" id="first-name" name="firstName" autocorrect="off" data-test="firstName" autocapitalize="none" aria-label="First Name" placeholder="First Name" class="input_error form_input"/>
+       - unexpected value "r"
 
 ```
 
 ```yaml
-- textbox "First Name": Wynter
+- textbox "First Name": r
 ```
 
 # Test source
@@ -59,7 +59,7 @@ Call log:
   23  |       await inventoryPage.addToCart(PRODUCTS[0].name);
   24  |       await inventoryPage.openCart();
   25  |       await cartPage.checkout();
-  26  |       await checkoutPage.fillInformation(CUSTOMER);
+  26  |       await checkoutPage.typeInformation(CUSTOMER);
   27  |       await test.info().attach('checkout-form-after-typing', { body: await page.screenshot(), contentType: 'image/png' });
   28  | 
 > 29  |       await expect(checkoutPage.firstName).toHaveValue(CUSTOMER.firstName);
@@ -70,7 +70,7 @@ Call log:
   33  |     });
   34  | 
   35  |   test('BUG-002 every product can be added to the cart',
-  36  |     { tag: ['@BUG-002', '@sev-high', '@P1'], annotation: bug('BUG-002', 'add-to-cart-fails-for-three-products') },
+  36  |     { tag: ['@BUG-002', '@sev-high', '@P2'], annotation: bug('BUG-002', 'add-to-cart-fails-for-three-products') },
   37  |     async ({ page, inventoryPage }) => {
   38  |       test.fail();
   39  |       for (const product of PRODUCTS) await inventoryPage.addToCart(product.name);
@@ -96,62 +96,72 @@ Call log:
   59  |       await expect(inventoryPage.cartBadge).toBeHidden();
   60  |     });
   61  | 
-  62  |   test('BUG-004 product link opens the product that was clicked',
-  63  |     { tag: ['@BUG-004', '@sev-high', '@P2'], annotation: bug('BUG-004', 'product-link-opens-wrong-product') },
-  64  |     async ({ page, inventoryPage, productPage }) => {
-  65  |       test.fail();
-  66  |       const product = PRODUCTS[0];
-  67  |       await inventoryPage.openProduct(product.name);
-  68  |       await expect(productPage.backButton).toBeVisible();
-  69  |       await test.info().attach('product-page-after-clicking-backpack', { body: await page.screenshot(), contentType: 'image/png' });
-  70  | 
-  71  |       await expect(page).toHaveURL(`/inventory-item.html?id=${product.id}`);
-  72  |       await expect(productPage.name).toHaveText(product.name);
-  73  |     });
-  74  | 
-  75  |   test('BUG-005 sort Name (Z to A) reverses the list',
-  76  |     { tag: ['@BUG-005', '@sev-medium', '@P3'], annotation: bug('BUG-005', 'product-sort-has-no-effect') },
-  77  |     async ({ page, inventoryPage }) => {
-  78  |       test.fail();
-  79  |       await inventoryPage.sortBy('za');
-  80  |       await test.info().attach('inventory-after-sort-za', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
-  81  | 
-  82  |       await expect(inventoryPage.itemNames).toHaveText(PRODUCTS.map(p => p.name).sort().reverse());
-  83  |     });
-  84  | 
-  85  |   test('BUG-006 every product shows its own image',
-  86  |     { tag: ['@BUG-006', '@sev-medium', '@P2'], annotation: bug('BUG-006', 'all-product-images-show-placeholder') },
-  87  |     async ({ page, inventoryPage }) => {
-  88  |       test.fail();
-  89  |       await test.info().attach('inventory-images', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
-  90  |       const sources = await inventoryPage.itemImages.evaluateAll(imgs => imgs.map(i => i.getAttribute('src')));
-  91  |       await test.info().attach('image-src-values', { body: JSON.stringify(sources, null, 2), contentType: 'application/json' });
-  92  | 
-  93  |       expect(new Set(sources).size).toBe(PRODUCTS.length);
-  94  |       for (const src of sources) expect(src).not.toContain('sl-404');
+  62  |   test('BUG-003 workaround: Remove works from the Cart page',
+  63  |     { tag: ['@workaround'], annotation: { type: 'issue', description: 'bugs/BUG-003-remove-from-cart-does-nothing-on-inventory.md' } },
+  64  |     async ({ inventoryPage, cartPage }) => {
+  65  |       const { name } = PRODUCTS[0];
+  66  |       await inventoryPage.addToCart(name);
+  67  |       await inventoryPage.openCart();
+  68  |       await expect(cartPage.itemNames).toHaveText([name]);
+  69  |       await cartPage.remove(name);
+  70  |       await expect(cartPage.items).toHaveCount(0);
+  71  |       await expect(inventoryPage.cartBadge).toBeHidden();
+  72  |     });
+  73  | 
+  74  |   test('BUG-004 product link opens the product that was clicked',
+  75  |     { tag: ['@BUG-004', '@sev-high', '@P2'], annotation: bug('BUG-004', 'product-link-opens-wrong-product') },
+  76  |     async ({ page, inventoryPage, productPage }) => {
+  77  |       test.fail();
+  78  |       const product = PRODUCTS[0];
+  79  |       await inventoryPage.openProduct(product.name);
+  80  |       await expect(productPage.backButton).toBeVisible();
+  81  |       await test.info().attach('product-page-after-clicking-backpack', { body: await page.screenshot(), contentType: 'image/png' });
+  82  | 
+  83  |       await expect(page).toHaveURL(`/inventory-item.html?id=${product.id}`);
+  84  |       await expect(productPage.name).toHaveText(product.name);
+  85  |     });
+  86  | 
+  87  |   test('BUG-005 sort Name (Z to A) reverses the list',
+  88  |     { tag: ['@BUG-005', '@sev-medium', '@P3'], annotation: bug('BUG-005', 'product-sort-has-no-effect') },
+  89  |     async ({ page, inventoryPage }) => {
+  90  |       test.fail();
+  91  |       await inventoryPage.sortBy('za');
+  92  |       await test.info().attach('inventory-after-sort-za', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
+  93  | 
+  94  |       await expect(inventoryPage.itemNames).toHaveText(PRODUCTS.map(p => p.name).sort().reverse());
   95  |     });
-  96  | });
-  97  | 
-  98  | test.describe('Known defects – problem_user product page', () => {
-  99  |   test('BUG-007 Fleece Jacket opens its own product page and adds a real item',
-  100 |     { tag: ['@BUG-007', '@sev-high', '@P2'], annotation: bug('BUG-007', 'fleece-jacket-opens-item-not-found') },
-  101 |     async ({ page, inventoryPage, productPage, cartPage }) => {
-  102 |       test.fail();
-  103 |       const product = PRODUCTS.find(p => p.name === 'Sauce Labs Fleece Jacket')!;
-  104 |       await inventoryPage.goto();
-  105 |       await inventoryPage.openProduct(product.name);
-  106 |       await expect(productPage.backButton).toBeVisible();
-  107 |       await test.info().attach('product-page-after-clicking-fleece-jacket', { body: await page.screenshot(), contentType: 'image/png' });
-  108 | 
-  109 |       await expect.soft(productPage.name).toHaveText(product.name);
-  110 |       await expect.soft(productPage.price).toHaveText(product.price);
-  111 | 
-  112 |       await page.getByRole('button', { name: 'Add to cart' }).click();
-  113 |       await expect(inventoryPage.cartBadge).toHaveText('1');
-  114 |       await cartPage.goto();
-  115 |       await test.info().attach('cart-after-adding-from-that-page', { body: await page.screenshot(), contentType: 'image/png' });
-  116 |       await expect(cartPage.itemNames, 'cart should list the item the badge counts').toHaveText([product.name]);
-  117 |     });
-  118 | });
-  119 | 
+  96  | 
+  97  |   test('BUG-006 every product shows its own image',
+  98  |     { tag: ['@BUG-006', '@sev-medium', '@P2'], annotation: bug('BUG-006', 'all-product-images-show-placeholder') },
+  99  |     async ({ page, inventoryPage }) => {
+  100 |       test.fail();
+  101 |       await test.info().attach('inventory-images', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
+  102 |       const sources = await inventoryPage.itemImages.evaluateAll(imgs => imgs.map(i => i.getAttribute('src')));
+  103 |       await test.info().attach('image-src-values', { body: JSON.stringify(sources, null, 2), contentType: 'application/json' });
+  104 | 
+  105 |       expect(new Set(sources).size).toBe(PRODUCTS.length);
+  106 |       for (const src of sources) expect(src).not.toContain('sl-404');
+  107 |     });
+  108 | });
+  109 | 
+  110 | test.describe('Known defects – problem_user product page', () => {
+  111 |   test('BUG-007 Fleece Jacket opens its own product page and adds a real item',
+  112 |     { tag: ['@BUG-007', '@sev-high', '@P2'], annotation: bug('BUG-007', 'fleece-jacket-opens-item-not-found') },
+  113 |     async ({ page, inventoryPage, productPage, cartPage }) => {
+  114 |       test.fail();
+  115 |       const product = PRODUCTS.find(p => p.name === 'Sauce Labs Fleece Jacket')!;
+  116 |       await inventoryPage.goto();
+  117 |       await inventoryPage.openProduct(product.name);
+  118 |       await expect(productPage.backButton).toBeVisible();
+  119 |       await test.info().attach('product-page-after-clicking-fleece-jacket', { body: await page.screenshot(), contentType: 'image/png' });
+  120 | 
+  121 |       await expect.soft(productPage.name).toHaveText(product.name);
+  122 |       await expect.soft(productPage.price).toHaveText(product.price);
+  123 | 
+  124 |       await page.getByRole('button', { name: 'Add to cart' }).click();
+  125 |       await expect(inventoryPage.cartBadge).toHaveText('1');
+  126 |       await cartPage.goto();
+  127 |       await test.info().attach('cart-after-adding-from-that-page', { body: await page.screenshot(), contentType: 'image/png' });
+  128 |       await expect(cartPage.itemNames, 'cart should list the item the badge counts').toHaveText([product.name]);
+  129 |     });
 ```

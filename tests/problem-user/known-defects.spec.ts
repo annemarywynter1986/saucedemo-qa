@@ -23,7 +23,7 @@ test.describe('Known defects – problem_user', () => {
       await inventoryPage.addToCart(PRODUCTS[0].name);
       await inventoryPage.openCart();
       await cartPage.checkout();
-      await checkoutPage.fillInformation(CUSTOMER);
+      await checkoutPage.typeInformation(CUSTOMER);
       await test.info().attach('checkout-form-after-typing', { body: await page.screenshot(), contentType: 'image/png' });
 
       await expect(checkoutPage.firstName).toHaveValue(CUSTOMER.firstName);
@@ -56,6 +56,18 @@ test.describe('Known defects – problem_user', () => {
       await test.info().attach('inventory-after-remove-click', { body: await page.screenshot(), contentType: 'image/png' });
 
       await expect(inventoryPage.addToCartButton(name)).toBeVisible();
+      await expect(inventoryPage.cartBadge).toBeHidden();
+    });
+
+  test('BUG-003 workaround: Remove works from the Cart page',
+    { tag: ['@workaround'], annotation: { type: 'issue', description: 'bugs/BUG-003-remove-from-cart-does-nothing-on-inventory.md' } },
+    async ({ inventoryPage, cartPage }) => {
+      const { name } = PRODUCTS[0];
+      await inventoryPage.addToCart(name);
+      await inventoryPage.openCart();
+      await expect(cartPage.itemNames).toHaveText([name]);
+      await cartPage.remove(name);
+      await expect(cartPage.items).toHaveCount(0);
       await expect(inventoryPage.cartBadge).toBeHidden();
     });
 

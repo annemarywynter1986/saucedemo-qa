@@ -25,10 +25,25 @@ Button returns to **Add to cart**; cart badge disappears.
 ## Actual
 Button still reads **Remove**; badge still shows **1**.
 
+## Reproducibility
+**Always (100%).** Confirmed 2026-11-16:
+- Automated test, 10 consecutive runs: failed 10/10, same assertion each time.
+- Scripted check, 5 fresh logins × 3 products (Backpack, Bike Light, Onesie): not removed 15/15. Same steps as `standard_user`: removed 15/15.
+- The three products that cannot be added at all (BUG-002) cannot be tested here.
+
+## Workaround
+Removing the item from the **Cart page** works: 5/5 fresh logins, covered by the test *BUG-003 workaround: Remove works from the Cart page* (`@workaround`).
+
 ## Impact
-Users cannot correct their cart from the Products page, so they may check out with items they did not want. P2, confirmed in triage: only the checkout blocker (BUG-001) is P1. Removal from the Cart page is not yet covered by a test.
+Users cannot correct their cart from the Products page, so they may check out with items they did not want. P2, confirmed in triage: only the checkout blocker (BUG-001) is P1, and the Cart page workaround works.
 
 ## Evidence
+Annotated screenshot (red outline = the defect):
+
+![BUG-003 annotated: remove does nothing](evidence/annotated/BUG-003_remove-does-nothing.png)
+
+Screenshot captured by the automated test:
+
 ![BUG-003 inventory after remove click](evidence/BUG-003/inventory-after-remove-click.png)
 
 - Screenshot after clicking Remove: [inventory-after-remove-click.png](evidence/BUG-003/inventory-after-remove-click.png)

@@ -11,7 +11,8 @@
     "report": "playwright show-report",
     "typecheck": "tsc --noEmit",
     "evidence:export": "playwright test --project=problem-user && EXPORT_DIR=$HOME/Desktop/saucedemo-bug-screenshots node scripts/collect-evidence.ts",
-    "walkthrough": "node scripts/record-walkthrough.ts"
+    "walkthrough": "node scripts/record-walkthrough.ts",
+    "evidence:annotated": "EVIDENCE_DIR=bugs/evidence/annotated node scripts/record-walkthrough.ts && mkdir -p $HOME/Desktop/saucedemo-bug-screenshots/annotated && cp bugs/evidence/annotated/*.png $HOME/Desktop/saucedemo-bug-screenshots/annotated/"
   },
   "author": "Anne Mary Wynter",
   "license": "MIT",

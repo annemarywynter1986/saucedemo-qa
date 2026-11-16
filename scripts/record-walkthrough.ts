@@ -1,14 +1,17 @@
 // Records one continuous video walking through every problem_user defect, with an
 // on-screen caption per bug and a red outline on the broken element.
 // Usage: node scripts/record-walkthrough.ts [output.webm]
+// EVIDENCE_DIR=dir also saves one annotated screenshot per defect moment.
 import { chromium, selectors, type Locator, type Page } from '@playwright/test';
 import { homedir } from 'node:os';
+import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { PASSWORD, USERS } from '../test-data/users.ts';
 import { CUSTOMER, PRODUCTS } from '../test-data/products.ts';
 
-const output = process.argv[2] ?? join(homedir(), 'Desktop', 'saucedemo-bug-walkthrough.webm');
+const output = process.argv[2] ?? join(homedir(), 'Desktop', 'saucedemo-bug-screenshots', 'saucedemo-bug-walkthrough.webm');
 const checkpoints = process.env.CHECKPOINT_DIR;
+if (process.env.EVIDENCE_DIR) mkdirSync(process.env.EVIDENCE_DIR, { recursive: true });
 const size = { width: 1280, height: 720 };
 
 selectors.setTestIdAttribute('data-test');
@@ -17,7 +20,17 @@ const context = await browser.newContext({ viewport: size, recordVideo: { dir: '
 const page = await context.newPage();
 let step = 0;
 
+let currentTitle = '';
+
 async function caption(title: string, detail: string) {
+  // A new defect starts: clear the previous defect's highlights.
+  if (title.split(' · ')[0] !== currentTitle.split(' · ')[0]) {
+    await page.evaluate(() => document.querySelectorAll<HTMLElement>('[data-qa-hl]').forEach(e => {
+      e.style.outline = '';
+      e.removeAttribute('data-qa-hl');
+    }));
+  }
+  currentTitle = title;
   await page.evaluate(([t, d]) => {
     let el = document.getElementById('qa-caption');
     if (!el) {
@@ -30,12 +43,34 @@ async function caption(title: string, detail: string) {
   }, [title, detail]);
 }
 
-async function highlight(locator: Locator) {
-  await locator.evaluateAll(els => els.forEach(e => ((e as HTMLElement).style.outline = '4px solid #dc2626')));
+// offset < 0 draws the outline inside the element (for images clipped by their frame).
+async function highlight(locator: Locator, offset = 2) {
+  await locator.evaluateAll((els, off) => els.forEach(e => {
+    (e as HTMLElement).style.outline = '4px solid #dc2626';
+    (e as HTMLElement).style.outlineOffset = `${off}px`;
+    e.setAttribute('data-qa-hl', '');
+  }), offset);
 }
 
-async function hold(ms = 2500) {
+// Annotated evidence screenshots (caption + red outline), saved when EVIDENCE_DIR is set.
+const evidenceDir = process.env.EVIDENCE_DIR;
+async function evidence(name: string, fullPage = false) {
+  if (!evidenceDir) return;
+  // On a full-page capture, pin the caption bar to the bottom of the page instead of the viewport.
+  if (fullPage) await page.evaluate(() => {
+    const el = document.getElementById('qa-caption');
+    if (el) { el.style.position = 'absolute'; el.style.bottom = 'auto'; el.style.top = `${document.documentElement.scrollHeight - el.offsetHeight}px`; }
+  });
+  await page.screenshot({ path: join(evidenceDir, `${name}.png`), fullPage });
+  if (fullPage) await page.evaluate(() => {
+    const el = document.getElementById('qa-caption');
+    if (el) { el.style.position = 'fixed'; el.style.top = ''; el.style.bottom = '0'; }
+  });
+}
+
+async function hold(ms = 2500, shot?: string, fullPage = false) {
   if (checkpoints) await page.screenshot({ path: join(checkpoints, `${String(++step).padStart(2, '0')}.png`) });
+  if (shot) await evidence(shot, fullPage);
   await page.waitForTimeout(ms);
 }
 
@@ -56,23 +91,25 @@ await page.getByTestId('login-button').click();
 
 // BUG-006
 await caption('BUG-006 · Medium / P2 · Every product shows the same placeholder image', 'All six products show the same dog photo instead of their own picture.');
-await highlight(page.locator('img.inventory_item_img'));
-await hold(4000);
+await highlight(page.locator('img.inventory_item_img'), -4);
+await hold(4000, 'BUG-006_same-placeholder-image', true);
 
 // BUG-005
 await caption('BUG-005 · Medium / P3 · Sort dropdown has no effect', 'Choosing "Name (Z to A)"… the list stays in A to Z order.');
 await hold(1500);
 await page.getByTestId('product-sort-container').selectOption('za');
 await highlight(page.getByTestId('inventory-item-name').first());
+await highlight(page.locator('.select_container'));
 await caption('BUG-005 · Medium / P3 · Sort dropdown has no effect', 'After choosing Z to A, "Sauce Labs Backpack" is still first.');
-await hold(3500);
+await hold(3500, 'BUG-005_sort-has-no-effect', true);
 
 // BUG-002
 await caption('BUG-002 · High / P2 · Add to cart fails for 3 of 6 products', 'Clicking Add to cart on all six products…');
 for (const { name } of PRODUCTS) await item(name).getByRole('button', { name: 'Add to cart' }).click();
 for (const name of ['Bolt T-Shirt', 'Fleece Jacket', 'Test.allTheThings']) await highlight(item(name).getByRole('button'));
-await highlight(page.getByTestId('shopping-cart-badge'));
+await highlight(page.getByTestId('shopping-cart-link'));
 await caption('BUG-002 · High / P2 · Add to cart fails for 3 of 6 products', 'Bolt T-Shirt, Fleece Jacket and Red T-Shirt still say "Add to cart". Cart badge shows 3, not 6.');
+await evidence('BUG-002_add-to-cart-fails', true);
 await page.mouse.wheel(0, 300);
 await hold(4500);
 await page.mouse.wheel(0, -300);
@@ -81,10 +118,11 @@ await page.mouse.wheel(0, -300);
 await caption('BUG-003 · High / P2 · Remove does nothing on the Products page', 'Clicking Remove on Sauce Labs Backpack…');
 await hold(1200);
 await item('Sauce Labs Backpack').getByRole('button', { name: 'Remove' }).click();
+await page.evaluate(() => window.scrollTo(0, 0));
 await highlight(item('Sauce Labs Backpack').getByRole('button'));
-await highlight(page.getByTestId('shopping-cart-badge'));
+await highlight(page.getByTestId('shopping-cart-link'));
 await caption('BUG-003 · High / P2 · Remove does nothing on the Products page', 'The button still says "Remove" and the badge still shows 3.');
-await hold(3500);
+await hold(3500, 'BUG-003_remove-does-nothing');
 
 // BUG-004
 await resetCart(page);
@@ -95,7 +133,7 @@ await page.getByTestId('inventory-item-name').filter({ hasText: 'Sauce Labs Back
 await page.getByTestId('back-to-products').waitFor();
 await caption('BUG-004 · High / P2 · Product link opens the wrong product', 'The page that opens is Sauce Labs Fleece Jacket ($49.99), not the Backpack ($29.99).');
 await highlight(page.locator('.inventory_details_name'));
-await hold(4000);
+await hold(4000, 'BUG-004_wrong-product-opens');
 
 // BUG-007
 await page.getByTestId('back-to-products').click();
@@ -104,15 +142,16 @@ await hold(1500);
 await page.getByTestId('inventory-item-name').filter({ hasText: 'Sauce Labs Fleece Jacket' }).click();
 await page.getByTestId('back-to-products').waitFor();
 await highlight(page.locator('.inventory_details_name, .inventory_details_price'));
-await caption('BUG-007 · High / P2 · Fleece Jacket opens "ITEM NOT FOUND"', 'Title "ITEM NOT FOUND", placeholder text, price "$√-1". Now clicking Add to cart…');
-await hold(4000);
+await caption('BUG-007 · High / P2 · Fleece Jacket opens "ITEM NOT FOUND"', 'Instead of the Fleece Jacket: title "ITEM NOT FOUND", placeholder text and price "$√-1".');
+await hold(4000, 'BUG-007_item-not-found-page');
+await caption('BUG-007 · High / P2 · Fleece Jacket opens "ITEM NOT FOUND"', 'Clicking Add to cart on this page…');
 await page.getByRole('button', { name: 'Add to cart' }).click();
-await highlight(page.getByTestId('shopping-cart-badge'));
+await highlight(page.getByTestId('shopping-cart-link'));
 await hold(1500);
 await page.getByTestId('shopping-cart-link').click();
-await highlight(page.getByTestId('shopping-cart-badge'));
+await highlight(page.getByTestId('shopping-cart-link'));
 await caption('BUG-007 · High / P2 · Phantom cart item', 'The badge says 1 item, but the cart is empty: a product that does not exist was stored.');
-await hold(4000);
+await hold(4000, 'BUG-007_phantom-cart-item');
 
 // BUG-001
 await resetCart(page);
@@ -129,11 +168,11 @@ await highlight(page.locator('[data-test="firstName"], [data-test="lastName"]'))
 const firstNow = await page.getByTestId('firstName').inputValue();
 const lastNow = await page.getByTestId('lastName').inputValue();
 await caption('BUG-001 · Critical / P1 · Checkout cannot be completed', `Each letter typed into Last Name replaced First Name. First Name is now "${firstNow}", Last Name is ${lastNow ? `"${lastNow}"` : "empty"}.`);
-await hold(4000);
+await hold(4000, 'BUG-001_last-name-overwrites-first-name');
 await page.getByTestId('continue').click();
 await highlight(page.getByTestId('error'));
 await caption('BUG-001 · Critical / P1 · Checkout cannot be completed', '"Error: Last Name is required" — the order cannot be placed.');
-await hold(4500);
+await hold(4500, 'BUG-001_last-name-required-error');
 
 await caption('End of walkthrough — 7 defects', 'Reports, screenshots and automated tests: github.com/annemarywynter1986/saucedemo-qa');
 await hold(3500);

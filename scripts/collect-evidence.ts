@@ -33,7 +33,7 @@ for (const spec of report.suites.flatMap(specs)) {
 const exportDir = process.env.EXPORT_DIR;
 if (exportDir) {
   mkdirSync(exportDir, { recursive: true });
-  for (const bugId of readdirSync(join('bugs', 'evidence'))) {
+  for (const bugId of readdirSync(join('bugs', 'evidence')).filter(d => /^BUG-\d+$/.test(d))) {
     for (const file of readdirSync(join('bugs', 'evidence', bugId)).filter(f => f.endsWith('.png'))) {
       copyFileSync(join('bugs', 'evidence', bugId, file), join(exportDir, `${bugId}_${file}`));
     }

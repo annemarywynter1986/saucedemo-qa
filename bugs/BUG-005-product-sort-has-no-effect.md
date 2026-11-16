@@ -28,6 +28,12 @@ List order is unchanged (*Sauce Labs Backpack* first).
 Shoppers cannot sort, but every product is still visible and reachable. Medium severity, P3.
 
 ## Evidence
+Annotated screenshot (red outline = the defect):
+
+![BUG-005 annotated: sort has no effect](evidence/annotated/BUG-005_sort-has-no-effect.png)
+
+Screenshot captured by the automated test:
+
 ![BUG-005 inventory after sort za](evidence/BUG-005/inventory-after-sort-za.png)
 
 - Full-page screenshot after choosing Z to A: [inventory-after-sort-za.png](evidence/BUG-005/inventory-after-sort-za.png)

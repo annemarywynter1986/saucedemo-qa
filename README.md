@@ -32,14 +32,14 @@ Severity/priority definitions, the defect workflow and the sprint recommendation
 
 ## Test suite
 
-26 tests in 5 files, Chromium:
+27 tests in 5 files, Chromium:
 
 | Project | Tests | What it covers |
 |---|---|---|
 | `setup` | 2 | Logs in `standard_user` and `problem_user` once and saves each session |
 | `login` | 5 | Both users log in; `locked_out_user` refused; wrong password refused; inventory blocked without a session |
 | `standard-user` | 12 | Product images, sorting (Z→A, price low→high), all six product links, add to cart, remove, end-to-end checkout |
-| `problem-user` | 7 | One test per defect, BUG-001 to BUG-007 |
+| `problem-user` | 8 | One test per defect, BUG-001 to BUG-007, plus the BUG-003 Cart-page workaround |
 
 ## Project structure
 
@@ -55,11 +55,12 @@ tests/
   problem-user/                 known-defects suite (one test per bug, marked test.fail())
 scripts/
   collect-evidence.ts           copies each bug's screenshots/video/trace into bugs/evidence/
-  record-walkthrough.ts         records one captioned video walking through every defect
+  record-walkthrough.ts         records one captioned video walking through every defect (+ annotated screenshots)
 bugs/
   README.md                     defect board, severity/priority definitions, workflow
   BUG-00x-*.md                  one report per defect, screenshots embedded
-  evidence/BUG-00x/             screenshots, video.webm, trace.zip, assertion output
+  evidence/BUG-00x/             test screenshots, video.webm, trace.zip, assertion output
+  evidence/annotated/           one captioned, outlined screenshot per defect moment
   jira-import.csv               all seven tickets for Jira CSV import
 .github/workflows/playwright.yml  runs the full suite on every push and pull request
 ```
@@ -103,10 +104,13 @@ The password defaults to the public demo password; override with `SAUCE_PASSWORD
 ```bash
 npm run evidence          # re-run the defect tests and refresh bugs/evidence/
 npm run evidence:export   # same, plus copy every screenshot to ~/Desktop/saucedemo-bug-screenshots
-npm run walkthrough       # record a captioned video of all seven defects to ~/Desktop/saucedemo-bug-walkthrough.webm
+npm run walkthrough       # record a captioned video of all seven defects to ~/Desktop/saucedemo-bug-screenshots/
+npm run evidence:annotated # same video, plus one annotated screenshot per defect (caption + red outline) in bugs/evidence/annotated/
 ```
 
-- **Screenshots** are embedded in each bug report and stored in `bugs/evidence/BUG-00x/`.
+- **Annotated screenshots** (`bugs/evidence/annotated/`) show each defect with a caption bar and a red outline on the broken element; they lead each bug report's Evidence section.
+- **Test screenshots** are captured by the automated tests and stored in `bugs/evidence/BUG-00x/`.
+- **Reproducibility** is recorded in each report where it was measured (BUG-003: 10/10 automated runs and 15/15 scripted attempts).
 - **Traces**: open one with `npx playwright show-trace bugs/evidence/BUG-001/trace.zip` to step through every action, DOM snapshot and network call.
 - **Videos** (`.webm`) play in Chrome, Firefox or VLC, and in Jira; QuickTime does not play WebM.
 - **CI**: each GitHub Actions run uploads the HTML report as the `playwright-report` artifact.

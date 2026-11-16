@@ -15,6 +15,10 @@ export class CartPage {
     await this.page.goto('/cart.html');
   }
 
+  async remove(name: string) {
+    await this.items.filter({ hasText: name }).getByRole('button', { name: 'Remove' }).click();
+  }
+
   async checkout() {
     await this.checkoutButton.click();
   }
