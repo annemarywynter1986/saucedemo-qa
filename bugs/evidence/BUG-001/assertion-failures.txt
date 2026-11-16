@@ -1,0 +1,22 @@
+Error: expect(locator).toHaveValue(expected) failed
+
+Locator:  getByTestId('firstName')
+Expected: "Anne"
+Received: "Wynter"
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveValue" getByTestId('firstName') with timeout 5000ms
+  - waiting for getByTestId('firstName')
+    14 × locator resolved to <input type="text" value="Wynter" id="first-name" name="firstName" autocorrect="off" data-test="firstName" autocapitalize="none" aria-label="First Name" placeholder="First Name" class="input_error form_input"/>
+       - unexpected value "Wynter"
+
+
+  27 |       await test.info().attach('checkout-form-after-typing', { body: await page.screenshot(), contentType: 'image/png' });
+  28 |
+> 29 |       await expect(checkoutPage.firstName).toHaveValue(CUSTOMER.firstName);
+     |                                            ^
+  30 |       await expect(checkoutPage.lastName).toHaveValue(CUSTOMER.lastName);
+  31 |       await checkoutPage.continue();
+  32 |       await expect(page).toHaveURL('/checkout-step-two.html');
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:29:44

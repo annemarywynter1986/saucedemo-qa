@@ -1,0 +1,24 @@
+{
+  "name": "saucedemo-qa",
+  "version": "1.0.0",
+  "description": "Playwright + TypeScript test automation and defect reports for saucedemo.com",
+  "scripts": {
+    "test": "playwright test",
+    "test:regression": "playwright test --project=login --project=standard-user",
+    "test:defects": "playwright test --project=problem-user",
+    "test:p1": "playwright test --grep @P1",
+    "evidence": "playwright test --project=problem-user && node scripts/collect-evidence.ts",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit",
+    "evidence:export": "EXPORT_DIR=$HOME/Desktop/saucedemo-bug-screenshots node scripts/collect-evidence.ts"
+  },
+  "author": "Anne Mary Wynter",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}

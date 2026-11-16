@@ -1,0 +1,20 @@
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Backpack', { exact: true }) }).getByRole('button', { name: 'Add to cart' })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Backpack', { exact: true }) }).getByRole('button', { name: 'Add to cart' }) with timeout 5000ms
+  - waiting for getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Backpack', { exact: true }) }).getByRole('button', { name: 'Add to cart' })
+
+
+  56 |       await test.info().attach('inventory-after-remove-click', { body: await page.screenshot(), contentType: 'image/png' });
+  57 |
+> 58 |       await expect(inventoryPage.addToCartButton(name)).toBeVisible();
+     |                                                         ^
+  59 |       await expect(inventoryPage.cartBadge).toBeHidden();
+  60 |     });
+  61 |
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:58:57

@@ -1,0 +1,97 @@
+Error: Sauce Labs Bolt T-Shirt should be in the cart
+
+expect(locator).toBeVisible() failed
+
+Locator: getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Bolt T-Shirt', { exact: true }) }).getByRole('button', { name: 'Remove' })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Sauce Labs Bolt T-Shirt should be in the cart getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Bolt T-Shirt', { exact: true }) }).getByRole('button', { name: 'Remove' }) with timeout 5000ms
+  - waiting for getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Bolt T-Shirt', { exact: true }) }).getByRole('button', { name: 'Remove' })
+
+
+  41 |
+  42 |       for (const product of PRODUCTS) {
+> 43 |         await expect.soft(inventoryPage.removeButton(product.name), `${product.name} should be in the cart`).toBeVisible();
+     |                                                                                                              ^
+  44 |       }
+  45 |       await expect(inventoryPage.cartBadge).toHaveText(String(PRODUCTS.length));
+  46 |     });
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:43:110
+
+---
+
+Error: Sauce Labs Fleece Jacket should be in the cart
+
+expect(locator).toBeVisible() failed
+
+Locator: getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Fleece Jacket', { exact: true }) }).getByRole('button', { name: 'Remove' })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Sauce Labs Fleece Jacket should be in the cart getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Fleece Jacket', { exact: true }) }).getByRole('button', { name: 'Remove' }) with timeout 5000ms
+  - waiting for getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Sauce Labs Fleece Jacket', { exact: true }) }).getByRole('button', { name: 'Remove' })
+
+
+  41 |
+  42 |       for (const product of PRODUCTS) {
+> 43 |         await expect.soft(inventoryPage.removeButton(product.name), `${product.name} should be in the cart`).toBeVisible();
+     |                                                                                                              ^
+  44 |       }
+  45 |       await expect(inventoryPage.cartBadge).toHaveText(String(PRODUCTS.length));
+  46 |     });
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:43:110
+
+---
+
+Error: Test.allTheThings() T-Shirt (Red) should be in the cart
+
+expect(locator).toBeVisible() failed
+
+Locator: getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Test.allTheThings() T-Shirt (Red)', { exact: true }) }).getByRole('button', { name: 'Remove' })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Test.allTheThings() T-Shirt (Red) should be in the cart getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Test.allTheThings() T-Shirt (Red)', { exact: true }) }).getByRole('button', { name: 'Remove' }) with timeout 5000ms
+  - waiting for getByTestId('inventory-item').filter({ has: getByTestId('inventory-item-name').getByText('Test.allTheThings() T-Shirt (Red)', { exact: true }) }).getByRole('button', { name: 'Remove' })
+
+
+  41 |
+  42 |       for (const product of PRODUCTS) {
+> 43 |         await expect.soft(inventoryPage.removeButton(product.name), `${product.name} should be in the cart`).toBeVisible();
+     |                                                                                                              ^
+  44 |       }
+  45 |       await expect(inventoryPage.cartBadge).toHaveText(String(PRODUCTS.length));
+  46 |     });
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:43:110
+
+---
+
+Error: expect(locator).toHaveText(expected) failed
+
+Locator:  getByTestId('shopping-cart-badge')
+Expected: "6"
+Received: "3"
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveText" getByTestId('shopping-cart-badge') with timeout 5000ms
+  - waiting for getByTestId('shopping-cart-badge')
+    14 × locator resolved to <span class="shopping_cart_badge" data-test="shopping-cart-badge">3</span>
+       - unexpected value "3"
+
+
+  43 |         await expect.soft(inventoryPage.removeButton(product.name), `${product.name} should be in the cart`).toBeVisible();
+  44 |       }
+> 45 |       await expect(inventoryPage.cartBadge).toHaveText(String(PRODUCTS.length));
+     |                                             ^
+  46 |     });
+  47 |
+  48 |   test('BUG-003 an added product can be removed from the inventory page',
+    at /Users/annewynter/Documents/REPOs/saucedemo-qa/tests/problem-user/known-defects.spec.ts:45:45
