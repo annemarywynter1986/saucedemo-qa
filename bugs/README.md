@@ -51,4 +51,6 @@ npm run walkthrough       # records one captioned video of all seven defects to 
 npm run evidence:annotated # same, plus one annotated screenshot per defect in bugs/evidence/annotated/
 ```
 
+The captioned walkthrough video of all seven defects is [`evidence/saucedemo-bug-walkthrough.webm`](evidence/saucedemo-bug-walkthrough.webm).
+
 `bugs/jira-import.csv` holds the same seven tickets for import into Jira (or any tracker that takes CSV).

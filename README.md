@@ -61,6 +61,7 @@ bugs/
   BUG-00x-*.md                  one report per defect, screenshots embedded
   evidence/BUG-00x/             test screenshots, video.webm, trace.zip, assertion output
   evidence/annotated/           one captioned, outlined screenshot per defect moment
+  evidence/saucedemo-bug-walkthrough.webm  captioned video of all seven defects
   jira-import.csv               all seven tickets for Jira CSV import
 .github/workflows/playwright.yml  runs the full suite on every push and pull request
 ```
@@ -112,6 +113,7 @@ npm run evidence:annotated # same video, plus one annotated screenshot per defec
 - **Test screenshots** are captured by the automated tests and stored in `bugs/evidence/BUG-00x/`.
 - **Reproducibility** is recorded in each report where it was measured (BUG-003: 10/10 automated runs and 15/15 scripted attempts).
 - **Traces**: open one with `npx playwright show-trace bugs/evidence/BUG-001/trace.zip` to step through every action, DOM snapshot and network call.
+- **Walkthrough video:** [`bugs/evidence/saucedemo-bug-walkthrough.webm`](bugs/evidence/saucedemo-bug-walkthrough.webm) shows all seven defects in one captioned recording (about 1.5 minutes).
 - **Videos** (`.webm`) play in Chrome, Firefox or VLC, and in Jira; QuickTime does not play WebM.
 - **CI**: each GitHub Actions run uploads the HTML report as the `playwright-report` artifact.
 
