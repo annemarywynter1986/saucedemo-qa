@@ -17,7 +17,7 @@ test.describe('Known defects – problem_user', () => {
   });
 
   test('BUG-001 checkout keeps the Last Name that was typed',
-    { tag: ['@BUG-001', '@sev-critical', '@P1'], annotation: bug('BUG-001', 'checkout-last-name-overwrites-first-name') },
+    { tag: ['@BUG-001', '@sev-high', '@P1'], annotation: bug('BUG-001', 'checkout-last-name-overwrites-first-name') },
     async ({ page, inventoryPage, cartPage, checkoutPage }) => {
       test.fail();
       await inventoryPage.addToCart(PRODUCTS[0].name);

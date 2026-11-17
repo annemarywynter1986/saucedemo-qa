@@ -155,11 +155,11 @@ await hold(4000, 'BUG-007_phantom-cart-item');
 
 // BUG-001
 await resetCart(page);
-await caption('BUG-001 · Critical / P1 · Checkout cannot be completed', 'Adding the Backpack and going to checkout…');
+await caption('BUG-001 · High / P1 · Checkout cannot continue', 'Adding the Backpack and going to checkout…');
 await item('Sauce Labs Backpack').getByRole('button', { name: 'Add to cart' }).click();
 await page.getByTestId('shopping-cart-link').click();
 await page.getByTestId('checkout').click();
-await caption('BUG-001 · Critical / P1 · Checkout cannot be completed', `Typing First Name "${CUSTOMER.firstName}", then Last Name "${CUSTOMER.lastName}"…`);
+await caption('BUG-001 · High / P1 · Checkout cannot continue', `Typing First Name "${CUSTOMER.firstName}", then Last Name "${CUSTOMER.lastName}"…`);
 await page.getByTestId('firstName').pressSequentially(CUSTOMER.firstName, { delay: 120 });
 await hold(800);
 await page.getByTestId('lastName').pressSequentially(CUSTOMER.lastName, { delay: 120 });
@@ -167,11 +167,11 @@ await page.getByTestId('postalCode').pressSequentially(CUSTOMER.postalCode, { de
 await highlight(page.locator('[data-test="firstName"], [data-test="lastName"]'));
 const firstNow = await page.getByTestId('firstName').inputValue();
 const lastNow = await page.getByTestId('lastName').inputValue();
-await caption('BUG-001 · Critical / P1 · Checkout cannot be completed', `Each letter typed into Last Name replaced First Name. First Name is now "${firstNow}", Last Name is ${lastNow ? `"${lastNow}"` : "empty"}.`);
+await caption('BUG-001 · High / P1 · Checkout cannot continue', `Each letter typed into Last Name replaced First Name. First Name is now "${firstNow}", Last Name is ${lastNow ? `"${lastNow}"` : "empty"}.`);
 await hold(4000, 'BUG-001_last-name-overwrites-first-name');
 await page.getByTestId('continue').click();
 await highlight(page.getByTestId('error'));
-await caption('BUG-001 · Critical / P1 · Checkout cannot be completed', '"Error: Last Name is required" — the order cannot be placed.');
+await caption('BUG-001 · High / P1 · Checkout cannot continue', '"Error: Last Name is required" — the order cannot be placed.');
 await hold(4500, 'BUG-001_last-name-required-error');
 
 await caption('End of walkthrough — 7 defects', 'Reports, screenshots and automated tests: github.com/annemarywynter1986/saucedemo-qa');

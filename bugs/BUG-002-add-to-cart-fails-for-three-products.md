@@ -5,7 +5,7 @@
 | Severity | **High** |
 | Priority | **P2 – next sprint** |
 | Component | Inventory › Add to cart |
-| Labels | cart, inventory, revenue |
+| Labels | cart, inventory |
 | Environment | https://www.saucedemo.com · Chromium 159 (Playwright 1.65.1, Desktop Chrome 1280×720) · macOS 26.2 |
 | Account | `problem_user` / `secret_sauce` (control: `standard_user` behaves correctly) |
 | Reported | 2026-11-16 · Anne Mary Wynter |
@@ -29,7 +29,7 @@ Backpack, Bike Light and Onesie change to Remove. Bolt T-Shirt, Fleece Jacket an
 The same three products cannot be added from their product pages either (Add to cart stays Add to cart, badge unchanged). Not yet automated.
 
 ## Impact
-Half the catalog cannot be bought — including the highest-priced item (Fleece Jacket, $49.99). No workaround: adding from the product page fails too.
+3 of the 6 products cannot be added to the cart, from the Products page or from their product pages.
 
 ## Evidence
 Annotated screenshot (red outline = the defect):

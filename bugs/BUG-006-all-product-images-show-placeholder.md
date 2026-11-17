@@ -25,7 +25,7 @@ Six distinct product images (backpack, bike light, t-shirt, etc.).
 Six copies of the same placeholder image; one unique `src` instead of six.
 
 ## Impact
-Users cannot tell products apart visually. Function is unaffected (Medium severity), but it is highly visible on the main landing page and hurts conversion, so priority is raised to P2.
+Products cannot be told apart by their images. Nothing else is affected (Medium severity). P2 because it is on the first page after login.
 
 ## Evidence
 Annotated screenshot (red outline = the defect):

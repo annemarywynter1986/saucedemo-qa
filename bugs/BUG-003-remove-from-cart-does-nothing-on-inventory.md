@@ -35,7 +35,7 @@ Button still reads **Remove**; badge still shows **1**.
 Removing the item from the **Cart page** works: 5/5 fresh logins, covered by the test *BUG-003 workaround: Remove works from the Cart page* (`@workaround`).
 
 ## Impact
-Users cannot correct their cart from the Products page, so they may check out with items they did not want. P2, confirmed in triage: only the checkout blocker (BUG-001) is P1, and the Cart page workaround works.
+Items cannot be removed from the Products page; they can still be removed from the Cart page. P2, confirmed in triage: only the checkout defect (BUG-001) is P1, and the Cart page workaround works.
 
 ## Evidence
 Annotated screenshot (red outline = the defect):

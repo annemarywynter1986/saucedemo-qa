@@ -39,7 +39,7 @@ Every link points to the wrong product (observed during exploration):
 The title, description, image and price on each opened page are consistent with each other; they belong to the wrong product.
 
 ## Impact
-Users see the wrong product's description and price, and *Add to cart* on that page adds the wrong item. Risk of wrong orders and customer complaints.
+Users see the wrong product's description and price, and *Add to cart* on that page adds the wrong item.
 
 ## Evidence
 Annotated screenshot (red outline = the defect):

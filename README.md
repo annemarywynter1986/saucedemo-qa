@@ -20,7 +20,7 @@ Two accounts are tested side by side:
 
 | ID | Severity | Priority | Summary |
 |---|---|---|---|
-| [BUG-001](bugs/BUG-001-checkout-last-name-overwrites-first-name.md) | Critical | P1 | Checkout: typing Last Name overwrites First Name; order cannot be placed |
+| [BUG-001](bugs/BUG-001-checkout-last-name-overwrites-first-name.md) | High | P1 | Checkout: typing Last Name overwrites First Name; checkout cannot continue |
 | [BUG-002](bugs/BUG-002-add-to-cart-fails-for-three-products.md) | High | P2 | Add to cart does nothing for 3 of 6 products |
 | [BUG-003](bugs/BUG-003-remove-from-cart-does-nothing-on-inventory.md) | High | P2 | Remove button on Products page does not remove the item |
 | [BUG-004](bugs/BUG-004-product-link-opens-wrong-product.md) | High | P2 | Clicking a product opens a different product's page |
@@ -73,7 +73,7 @@ bugs/
 - Login runs once per user in the `setup` project; tests reuse the session via `storageState`.
 - Defect tests assert the **correct** behaviour and are marked `test.fail()`. The suite stays green while the bug exists. When a bug is fixed, Playwright reports an unexpected pass, which is the signal to verify and close the ticket.
 - Every defect test attaches a named screenshot at the moment the bug shows, plus a final-state screenshot, video and trace.
-- Tags: `@smoke`, `@BUG-xxx`, `@sev-critical|high|medium`, `@P1|P2|P3`.
+- Tags: `@smoke`, `@BUG-xxx`, `@sev-high|medium`, `@P1|P2|P3`.
 
 ## Getting started
 
@@ -93,7 +93,7 @@ npm test                  # everything
 npm run test:regression   # login + standard_user
 npm run test:defects      # problem_user known defects
 npm run test:p1           # only P1 defects (--grep @P1)
-npx playwright test --grep @sev-critical
+npx playwright test --grep @sev-high
 npm run report            # open the HTML report (screenshots, video, trace per test)
 npm run typecheck         # TypeScript check
 ```

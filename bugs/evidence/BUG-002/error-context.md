@@ -272,7 +272,7 @@ Call log:
   17  |   });
   18  | 
   19  |   test('BUG-001 checkout keeps the Last Name that was typed',
-  20  |     { tag: ['@BUG-001', '@sev-critical', '@P1'], annotation: bug('BUG-001', 'checkout-last-name-overwrites-first-name') },
+  20  |     { tag: ['@BUG-001', '@sev-high', '@P1'], annotation: bug('BUG-001', 'checkout-last-name-overwrites-first-name') },
   21  |     async ({ page, inventoryPage, cartPage, checkoutPage }) => {
   22  |       test.fail();
   23  |       await inventoryPage.addToCart(PRODUCTS[0].name);
